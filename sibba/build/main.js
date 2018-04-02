@@ -1,157 +1,5 @@
 webpackJsonp([0],{
 
-/***/ 102:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = searchList;
-/* harmony export (immutable) */ __webpack_exports__["a"] = searchAddress;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(324);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-
-function searchList(searchWord, tempList) {
-    if (searchWord == null || searchWord == '') {
-        return __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList);
-        ;
-    }
-    var tl = __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList);
-    tl[0] = __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList[0]);
-    var newTagMap = new Map();
-    tl[0].tagMap.forEach(function (value, key) {
-        // if(value.root_title)
-        // indexOf
-        var searcharr = [];
-        for (var i = 0; i < value.length; ++i) {
-            var post = value[i];
-            if (post.root_title.indexOf(searchWord) >= 0) {
-                searcharr.push(post);
-            }
-        }
-        newTagMap.set(key, searcharr);
-    });
-    tl[0].tagMap = newTagMap;
-    return tl;
-}
-function searchAddress(post, mds) {
-    // let idx = -1;
-    var addrs = new Array();
-    for (var i = 0; i < mds.length; ++i) {
-        var paList = parseAddr(post.body, mds[i].addr);
-        for (var j = 0; j < paList.length; ++j) {
-            addrs.push({
-                addr: paList[j],
-                type: mds[i].type,
-                post: post,
-            });
-        }
-        // if(pa != null) {
-        //   // console.log(pa);
-        // }
-    }
-    return addrs;
-}
-function parseAddr(body, pattern) {
-    var startIdx = 0;
-    var retArr = new Array();
-    do {
-        startIdx = body.indexOf(pattern, startIdx);
-        if (startIdx < 0) {
-            break;
-        }
-        var endIdx = checkEndIdx(body, startIdx);
-        var pa = void 0;
-        if (endIdx < 0) {
-            pa = body.substring(startIdx);
-        }
-        else {
-            pa = body.substring(startIdx, endIdx);
-        }
-        pa = processOtherPattern(pa);
-        retArr.push(pa);
-        if (endIdx > 0) {
-            startIdx = endIdx + 1;
-        }
-        else {
-            startIdx = endIdx;
-        }
-    } while (startIdx >= 0);
-    return retArr;
-}
-function processOtherPattern(pa) {
-    var lpIdx = pa.indexOf('/watch?v=');
-    if (lpIdx > 0) {
-        pa = processOtherPatternWatch(pa);
-        return pa;
-    }
-    lpIdx = pa.indexOf('youtu.be/');
-    if (lpIdx > 0) {
-        pa = processOtherPatternShort(pa);
-        return pa;
-    }
-    return pa;
-}
-function processOtherPatternWatch(pa) {
-    var lpIdx = pa.indexOf('/watch?v=');
-    if (lpIdx > 0) {
-        var yKey = pa.substring(lpIdx + '/watch?v='.length);
-        yKey = removeGarbage(yKey);
-        pa = 'https://www.youtube.com/embed/';
-        pa += yKey;
-        console.log(pa);
-    }
-    return pa;
-}
-function processOtherPatternShort(pa) {
-    var lpIdx = pa.indexOf('youtu.be/');
-    if (lpIdx > 0) {
-        var yKey = pa.substring(lpIdx + 'youtu.be/'.length);
-        yKey = removeGarbage(yKey);
-        pa = 'https://www.youtube.com/embed/';
-        pa += yKey;
-        console.log(pa);
-    }
-    return pa;
-}
-function removeGarbage(yKey) {
-    var garbageIdx = yKey.indexOf(')');
-    if (garbageIdx > 0) {
-        return yKey.substring(0, garbageIdx);
-    }
-    garbageIdx = yKey.indexOf('&t=');
-    if (garbageIdx > 0) {
-        return yKey.substring(0, garbageIdx);
-    }
-    return yKey;
-}
-function checkEndIdx(body, startIdx) {
-    // let enter: number = body.indexOf('\n', startIdx);
-    // let space: number = body.indexOf(' ', startIdx);
-    // let dq: number = body.indexOf('"', startIdx);
-    // let checkArr: Array<number> = [enter, space, dq];
-    var checkArr = new Array();
-    checkArr.push(body.indexOf('\n', startIdx));
-    checkArr.push(body.indexOf(' ', startIdx));
-    checkArr.push(body.indexOf('"', startIdx));
-    checkArr.push(body.indexOf('<br', startIdx));
-    checkArr.sort(function (a, b) {
-        if (a > b) {
-            return 1;
-        }
-        else {
-            return -1;
-        }
-    });
-    for (var i = 0; i < checkArr.length; ++i) {
-        if (checkArr[i] != -1) {
-            return checkArr[i];
-        }
-    }
-    return -1;
-}
-//# sourceMappingURL=SearchUtil.js.map
-
-/***/ }),
-
 /***/ 150:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -394,6 +242,9 @@ var HomePage = (function () {
         // console.log(startPermlink + " -- " +date );
         __WEBPACK_IMPORTED_MODULE_6_steem__["api"].getDiscussionsByAuthorBeforeDateAsync(author, startPermlink, HomePage_1.DATE, HomePage_1.GET_SIZE, function (err, result) {
             // console.log(result);
+            if (err != null || err != undefined) {
+                return;
+            }
             var post = null;
             var lastPermlink;
             for (var indexI = 0; indexI < result.length; ++indexI) {
@@ -504,7 +355,7 @@ var HomePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -737,7 +588,7 @@ var getMode = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSele
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -847,7 +698,7 @@ var CardPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -958,7 +809,7 @@ var RealCardPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(43);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1240,6 +1091,7 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_card_card__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_real_card_real_card__ = __webpack_require__(329);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_music_music__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_commons_SearchUtil__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1249,6 +1101,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1278,6 +1131,8 @@ var MyApp = (function () {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.selectTag = 'all_all';
         this.selectedPosts = new Array();
+        this.searchTagWord = '';
+        this.sortFlag = 0;
         this.postInfoList = postStore.select(__WEBPACK_IMPORTED_MODULE_7__ng_reducers_post_reducer__["a" /* getPosts */]);
         this.authorInfoList = authorStore.select(__WEBPACK_IMPORTED_MODULE_8__ng_reducers_author_reducer__["a" /* getAuthor */]);
         this.getEndFlag = this.getEndStore.select(__WEBPACK_IMPORTED_MODULE_9__ng_reducers_getend_reducer__["a" /* getGetEnd */]);
@@ -1346,7 +1201,9 @@ var MyApp = (function () {
                 var tagName = postOne.tagList[i];
                 tpages.push({ tag: tagName, count: postOne.tagMap.get(tagName.toString()).length, component: __WEBPACK_IMPORTED_MODULE_5__pages_list_list__["a" /* ListPage */] });
             }
-            _this.pages = tpages;
+            _this.tempPages = tpages;
+            _this.pages = __WEBPACK_IMPORTED_MODULE_15__app_commons_SearchUtil__["c" /* searchTagList */](_this.searchTagWord, _this.tempPages);
+            _this.realTagSort(_this.sortFlag);
         }, function (error) {
             console.log(error.message);
         });
@@ -1363,6 +1220,47 @@ var MyApp = (function () {
         this.selectStore.dispatch(new __WEBPACK_IMPORTED_MODULE_11__ng_actions_actions__["j" /* SelectAction */](page.tag));
         this.nav.setRoot(page.component);
     };
+    MyApp.prototype.getItems = function (ev) {
+        this.searchTagWord = ev.target.value;
+        this.pages = __WEBPACK_IMPORTED_MODULE_15__app_commons_SearchUtil__["c" /* searchTagList */](this.searchTagWord, this.tempPages);
+    };
+    MyApp.prototype.tagSort = function (flag) {
+        switch (flag) {
+            case 1:
+                {
+                    console.log('big');
+                    this.sortFlag = -1;
+                }
+                break;
+            case 2:
+                {
+                    console.log('small');
+                    this.sortFlag = 1;
+                }
+                break;
+            case 3:
+                this.sortFlag = 0;
+                break;
+            default:
+                this.sortFlag = -1;
+                break;
+        }
+        this.realTagSort(this.sortFlag);
+    };
+    MyApp.prototype.realTagSort = function (flag) {
+        if (flag == 0) {
+            this.pages = __WEBPACK_IMPORTED_MODULE_15__app_commons_SearchUtil__["c" /* searchTagList */](this.searchTagWord, this.tempPages);
+            return;
+        }
+        this.pages.sort(function (a, b) {
+            if (a.count > b.count) {
+                return 1 * flag;
+            }
+            else {
+                return -1 * flag;
+            }
+        });
+    };
     MyApp.DATE = new Date().toISOString().split('.')[0];
     MyApp.GET_SIZE = 10;
     __decorate([
@@ -1370,7 +1268,7 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = MyApp_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n      <ion-toolbar>\n          <button menuClose ion-item (click)="goSearch()">\n          Go Search</button>\n        </ion-toolbar>\n    <ion-toolbar>\n      <ion-title>Tags</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n          <div *ngIf="p.tag == \'all_all\'">\n              all - {{p.count}}\n            </div>\n            <div *ngIf="p.tag != \'all_all\'">\n                {{p.tag}} - {{p.count}}\n            </div>\n        \n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n      <ion-toolbar>\n          <button menuClose ion-item (click)="goSearch()">\n          Go Search</button>\n        </ion-toolbar>\n    <ion-toolbar>\n\n      <ion-title>Tags</ion-title>\n      <button ion-button color="light" (click)="tagSort(1)">많은순</button>\n      <button ion-button color="dark" (click)="tagSort(2)">적은순</button>\n      <button ion-button color="danger" (click)="tagSort(3)">최근순</button>\n      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n          <div *ngIf="p.tag == \'all_all\'">\n              all - {{p.count}}\n            </div>\n            <div *ngIf="p.tag != \'all_all\'">\n                {{p.tag}} - {{p.count}}\n            </div>\n        \n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
             __WEBPACK_IMPORTED_MODULE_6__ngrx_store__["a" /* Store */],
@@ -1540,6 +1438,172 @@ function reducer(state, action) {
 var getSelectState = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["c" /* createFeatureSelector */])('selectState');
 var getSelect = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSelector */])(getSelectState, function (state) { return state.selectTag; });
 //# sourceMappingURL=select.reducer.js.map
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["c"] = searchTagList;
+/* harmony export (immutable) */ __webpack_exports__["b"] = searchList;
+/* harmony export (immutable) */ __webpack_exports__["a"] = searchAddress;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+
+function searchTagList(searchWord, tempList) {
+    if (searchWord == null || searchWord == '') {
+        return __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList);
+        ;
+    }
+    var tl = new Array();
+    for (var i = 0; i < tempList.length; ++i) {
+        if (tempList[i].tag.indexOf(searchWord) >= 0) {
+            tl.push(tempList[i]);
+        }
+    }
+    return tl;
+}
+function searchList(searchWord, tempList) {
+    if (searchWord == null || searchWord == '') {
+        return __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList);
+        ;
+    }
+    var tl = __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList);
+    tl[0] = __WEBPACK_IMPORTED_MODULE_0_lodash__["clone"](tempList[0]);
+    var newTagMap = new Map();
+    tl[0].tagMap.forEach(function (value, key) {
+        // if(value.root_title)
+        // indexOf
+        var searcharr = [];
+        for (var i = 0; i < value.length; ++i) {
+            var post = value[i];
+            if (post.root_title.indexOf(searchWord) >= 0) {
+                searcharr.push(post);
+            }
+        }
+        newTagMap.set(key, searcharr);
+    });
+    tl[0].tagMap = newTagMap;
+    return tl;
+}
+function searchAddress(post, mds) {
+    // let idx = -1;
+    var addrs = new Array();
+    for (var i = 0; i < mds.length; ++i) {
+        var paList = parseAddr(post.body, mds[i].addr);
+        for (var j = 0; j < paList.length; ++j) {
+            addrs.push({
+                addr: paList[j],
+                type: mds[i].type,
+                post: post,
+            });
+        }
+        // if(pa != null) {
+        //   // console.log(pa);
+        // }
+    }
+    return addrs;
+}
+function parseAddr(body, pattern) {
+    var startIdx = 0;
+    var retArr = new Array();
+    do {
+        startIdx = body.indexOf(pattern, startIdx);
+        if (startIdx < 0) {
+            break;
+        }
+        var endIdx = checkEndIdx(body, startIdx);
+        var pa = void 0;
+        if (endIdx < 0) {
+            pa = body.substring(startIdx);
+        }
+        else {
+            pa = body.substring(startIdx, endIdx);
+        }
+        pa = processOtherPattern(pa);
+        retArr.push(pa);
+        if (endIdx > 0) {
+            startIdx = endIdx + 1;
+        }
+        else {
+            startIdx = endIdx;
+        }
+    } while (startIdx >= 0);
+    return retArr;
+}
+function processOtherPattern(pa) {
+    var lpIdx = pa.indexOf('/watch?v=');
+    if (lpIdx > 0) {
+        pa = processOtherPatternWatch(pa);
+        return pa;
+    }
+    lpIdx = pa.indexOf('youtu.be/');
+    if (lpIdx > 0) {
+        pa = processOtherPatternShort(pa);
+        return pa;
+    }
+    return pa;
+}
+function processOtherPatternWatch(pa) {
+    var lpIdx = pa.indexOf('/watch?v=');
+    if (lpIdx > 0) {
+        var yKey = pa.substring(lpIdx + '/watch?v='.length);
+        yKey = removeGarbage(yKey);
+        pa = 'https://www.youtube.com/embed/';
+        pa += yKey;
+        console.log(pa);
+    }
+    return pa;
+}
+function processOtherPatternShort(pa) {
+    var lpIdx = pa.indexOf('youtu.be/');
+    if (lpIdx > 0) {
+        var yKey = pa.substring(lpIdx + 'youtu.be/'.length);
+        yKey = removeGarbage(yKey);
+        pa = 'https://www.youtube.com/embed/';
+        pa += yKey;
+        console.log(pa);
+    }
+    return pa;
+}
+function removeGarbage(yKey) {
+    var garbageIdx = yKey.indexOf(')');
+    if (garbageIdx > 0) {
+        return yKey.substring(0, garbageIdx);
+    }
+    garbageIdx = yKey.indexOf('&t=');
+    if (garbageIdx > 0) {
+        return yKey.substring(0, garbageIdx);
+    }
+    return yKey;
+}
+function checkEndIdx(body, startIdx) {
+    // let enter: number = body.indexOf('\n', startIdx);
+    // let space: number = body.indexOf(' ', startIdx);
+    // let dq: number = body.indexOf('"', startIdx);
+    // let checkArr: Array<number> = [enter, space, dq];
+    var checkArr = new Array();
+    checkArr.push(body.indexOf('\n', startIdx));
+    checkArr.push(body.indexOf(' ', startIdx));
+    checkArr.push(body.indexOf('"', startIdx));
+    checkArr.push(body.indexOf('<br', startIdx));
+    checkArr.sort(function (a, b) {
+        if (a > b) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    });
+    for (var i = 0; i < checkArr.length; ++i) {
+        if (checkArr[i] != -1) {
+            return checkArr[i];
+        }
+    }
+    return -1;
+}
+//# sourceMappingURL=SearchUtil.js.map
 
 /***/ })
 

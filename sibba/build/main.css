@@ -25768,5 +25768,6 @@ ion-navbar.toolbar {
 }
 
 .col {
-  min-width: 300px;
+  min-width: 300px !important;
+  max-width: 300px  !important;
 }
