@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 150:
+/***/ 151:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38,7 +38,7 @@ var getAuthor = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSe
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -51,7 +51,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 177;
+webpackEmptyAsyncContext.id = 178;
 
 /***/ }),
 
@@ -118,7 +118,7 @@ var ModeAction = (function () {
 
 /***/ }),
 
-/***/ 220:
+/***/ 221:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -131,11 +131,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 220;
+webpackEmptyAsyncContext.id = 221;
 
 /***/ }),
 
-/***/ 264:
+/***/ 265:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -144,11 +144,11 @@ webpackEmptyAsyncContext.id = 220;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_author_reducer__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_author_reducer__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_steem__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_steem__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_steem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_steem__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(325);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -421,6 +421,8 @@ var HomePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -430,6 +432,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -533,7 +536,8 @@ var ListPage = (function () {
     ListPage.prototype.optionSelected = function (event) {
         console.log('-=-=-=-=optionSelected=-=-=-=-=-=');
         console.log(event);
-        this.modetore.dispatch(new __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__["f" /* ModeAction */](String(event)));
+        var mode = __WEBPACK_IMPORTED_MODULE_7_lodash__["clone"](event);
+        this.modetore.dispatch(new __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__["f" /* ModeAction */](String(mode)));
     };
     ListPage.prototype.onCancel = function (event) {
         // console.log('-=-=-=-=onCancel=-=-=-=-=-=');
@@ -550,7 +554,7 @@ var ListPage = (function () {
     };
     ListPage = ListPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\list\list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n\n\n      <div *ngIf="selectTag == \'all_all\'">\n        List - Posts - all\n      </div>\n      <div *ngIf="selectTag != \'all_all\'">\n        List - Posts - {{selectTag}}\n      </div>\n\n      <ion-item>\n        <ion-label>Mode</ion-label>\n        <ion-select (ionChange)="optionSelected($event)">\n          <ion-option value=\'list\'>list</ion-option>\n          <ion-option value=\'card\'>card</ion-option>\n          <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n          <ion-option value=\'image\'>image</ion-option>\n          <ion-option value=\'music\'>music</ion-option>\n          <!-- </div> -->\n        </ion-select>\n      </ion-item>\n\n\n\n    </ion-title>\n    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <!-- <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-end>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div> -->\n  \n  <ion-grid fixed>\n    <ion-list *ngFor="let postInfo of postList">\n      <ion-item *ngFor="let post of postInfo.tagMap.get(selectTag)">\n        <ion-avatar item-start>\n          <div *ngIf="post.json_metadata.image != undefined ">\n            <img src="https://steemitimages.com/200x0/{{post.json_metadata.image[0]}}">\n          </div>\n        </ion-avatar>\n        <h2>\n          <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n        </h2>\n        <p>{{post.created}}</p>\n        <p>Votes : {{post.net_votes}} , reply : {{post.children}} </p>\n      </ion-item>\n    </ion-list>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\list\list.html"*/,
+            selector: 'page-list',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\list\list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n\n\n      <div *ngIf="selectTag == \'all_all\'">\n        List - Posts - all\n      </div>\n      <div *ngIf="selectTag != \'all_all\'">\n        List - Posts - {{selectTag}}\n      </div>\n\n      <ion-item>\n        <ion-label>Mode</ion-label>\n        <ion-select (ionChange)="optionSelected($event)">\n          <ion-option value=\'list\'>list</ion-option>\n          <ion-option value=\'card\'>card</ion-option>\n          <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n          <ion-option value=\'image\'>image</ion-option>\n          <ion-option value=\'music\'>music</ion-option>\n          <!-- </div> -->\n          <!-- <div *ngIf="selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n            <ion-option value=\'catch\'>catchmind</ion-option>\n         <!-- </div> -->\n        </ion-select>\n      </ion-item>\n\n\n\n    </ion-title>\n    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <!-- <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-end>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div> -->\n  \n  <ion-grid fixed>\n    <ion-list *ngFor="let postInfo of postList">\n      <ion-item *ngFor="let post of postInfo.tagMap.get(selectTag)">\n        <ion-avatar item-start>\n          <div *ngIf="post.json_metadata.image != undefined ">\n            <img src="https://steemitimages.com/200x0/{{post.json_metadata.image[0]}}">\n          </div>\n        </ion-avatar>\n        <h2>\n          <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n        </h2>\n        <p>{{post.created}}</p>\n        <p>Votes : {{post.net_votes}} , reply : {{post.children}} </p>\n      </ion-item>\n    </ion-list>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\list\list.html"*/,
             styleUrls: ['/src/pages/card/list.scss']
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -737,7 +741,7 @@ var CardPage = (function () {
     };
     CardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\card\card.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Image - Posts - all\n\n            </div>\n\n            <div *ngIf="selectTag != \'all_all\'">\n\n                Image - Posts - {{selectTag}}\n\n            </div>\n\n\n\n            <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                    <ion-option value=\'list\'>list</ion-option>\n\n                    <ion-option value=\'card\'>card</ion-option>\n\n                    <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    \n\n    <ion-grid>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <ion-col *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <div *ngIf="post.json_metadata.image != undefined ">\n\n                    <div *ngFor="let img of post.json_metadata.image">\n\n                        <ion-card class="ion-card-small">\n\n                            <!-- <div *ngIf="post.json_metadata.image != undefined "> -->\n\n                            <img src="https://steemitimages.com/400x0/{{img}}">\n\n\n\n                            <div class="card-title">\n\n                                <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                            </div>\n\n                            <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                        </ion-card>\n\n                    </div>\n\n                </div>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\card\card.html"*/,
+            selector: 'page-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\card\card.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Image - Posts - all\n\n            </div>\n\n            <div *ngIf="selectTag != \'all_all\'">\n\n                Image - Posts - {{selectTag}}\n\n            </div>\n\n\n\n            <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                    <ion-option value=\'list\'>list</ion-option>\n\n                    <ion-option value=\'card\'>card</ion-option>\n\n                    <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                     <!-- <div *ngIf="selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                        <ion-option value=\'catch\'>catchmind</ion-option>\n\n                     <!-- </div> -->\n\n                    <!-- </div> -->\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    \n\n    <ion-grid>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <ion-col *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <div *ngIf="post.json_metadata.image != undefined ">\n\n                    <div *ngFor="let img of post.json_metadata.image">\n\n                        <ion-card class="ion-card-small">\n\n                            <!-- <div *ngIf="post.json_metadata.image != undefined "> -->\n\n                            <img src="https://steemitimages.com/400x0/{{img}}">\n\n\n\n                            <div class="card-title">\n\n                                <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                            </div>\n\n                            <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                        </ion-card>\n\n                    </div>\n\n                </div>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\card\card.html"*/,
             styleUrls: ['/src/pages/card/card.scss']
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -848,7 +852,7 @@ var RealCardPage = (function () {
     };
     RealCardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-real-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\real-card\real-card.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Card - Posts - all\n\n              </div>\n\n              <div *ngIf="selectTag != \'all_all\'">\n\n                Card - Posts - {{selectTag}}\n\n              </div>\n\n        \n\n              <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                  <ion-option value=\'list\'>list</ion-option>\n\n                  <ion-option value=\'card\'>card</ion-option>\n\n                  <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                </ion-select>\n\n              </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n       \n\n    <ion-grid>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <ion-col *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <ion-card class="ion-card-small">\n\n                    <div *ngIf="post.json_metadata.image != undefined ">\n\n                        <img src="https://steemitimages.com/200x0/{{post.json_metadata.image[0]}}">\n\n                    </div>\n\n\n\n                    <div class="card-title">\n\n                        <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                    </div>\n\n                    <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                </ion-card>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\real-card\real-card.html"*/,
+            selector: 'page-real-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\real-card\real-card.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Card - Posts - all\n\n              </div>\n\n              <div *ngIf="selectTag != \'all_all\'">\n\n                Card - Posts - {{selectTag}}\n\n              </div>\n\n        \n\n              <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                  <ion-option value=\'list\'>list</ion-option>\n\n                  <ion-option value=\'card\'>card</ion-option>\n\n                  <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                    <ion-option value=\'catch\'>catchmind</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n       \n\n    <ion-grid>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <ion-col *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <ion-card class="ion-card-small">\n\n                    <div *ngIf="post.json_metadata.image != undefined ">\n\n                        <img src="https://steemitimages.com/200x0/{{post.json_metadata.image[0]}}">\n\n                    </div>\n\n\n\n                    <div class="card-title">\n\n                        <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                    </div>\n\n                    <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                </ion-card>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\real-card\real-card.html"*/,
             styleUrls: ['/src/pages/real-card/real-card.scss']
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -1026,7 +1030,7 @@ var MusicPage = (function () {
     };
     MusicPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-music',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\music\music.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Music - Posts - all\n\n            </div>\n\n            <div *ngIf="selectTag != \'all_all\'">\n\n                Music - Posts - {{selectTag}}\n\n            </div>\n\n\n\n            <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                    <ion-option value=\'list\'>list</ion-option>\n\n                    <ion-option value=\'card\'>card</ion-option>\n\n                    <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    \n\n\n\n    <ion-grid>\n\n        <ion-row>\n\n            <ion-col class="col-size" *ngFor="let md of mdsList">\n\n                <div>\n\n                    <ion-card>\n\n                        <div *ngIf="md.addr != null ">\n\n                            <div *ngIf="md.type == \'yb\'">\n\n                                <iframe width="100%" height="166" [src]="mediaUrl(md.addr)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>\n\n                            </div>\n\n                            <div *ngIf="md.type == \'sc\'">\n\n                                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" [src]="mediaUrl(md.addr)"></iframe>\n\n                            </div>\n\n                        </div>\n\n                        <!-- {{md.post}} -->\n\n                        <ion-card-content>\n\n                            <p>\n\n                                <a href="https://steemit.com{{md.post.url}}" target="_blank">{{md.post.root_title}}</a>\n\n                            </p>\n\n                            <p>\n\n                                {{md.post.created}} Votes : {{md.post.net_votes}} , reply : {{md.post.children}}\n\n                            </p>\n\n                        </ion-card-content>\n\n                    </ion-card>\n\n                </div>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\music\music.html"*/,
+            selector: 'page-music',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\music\music.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Music - Posts - all\n\n            </div>\n\n            <div *ngIf="selectTag != \'all_all\'">\n\n                Music - Posts - {{selectTag}}\n\n            </div>\n\n\n\n            <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                    <ion-option value=\'list\'>list</ion-option>\n\n                    <ion-option value=\'card\'>card</ion-option>\n\n                    <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                    <ion-option value=\'catch\'>catchmind</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    \n\n\n\n    <ion-grid>\n\n        <ion-row>\n\n            <ion-col class="col-size" *ngFor="let md of mdsList">\n\n                <div>\n\n                    <ion-card>\n\n                        <div *ngIf="md.addr != null ">\n\n                            <div *ngIf="md.type == \'yb\'">\n\n                                <iframe width="100%" height="166" [src]="mediaUrl(md.addr)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>\n\n                            </div>\n\n                            <div *ngIf="md.type == \'sc\'">\n\n                                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" [src]="mediaUrl(md.addr)"></iframe>\n\n                            </div>\n\n                        </div>\n\n                        <!-- {{md.post}} -->\n\n                        <ion-card-content>\n\n                            <p>\n\n                                <a href="https://steemit.com{{md.post.url}}" target="_blank">{{md.post.root_title}}</a>\n\n                            </p>\n\n                            <p>\n\n                                {{md.post.created}} Votes : {{md.post.net_votes}} , reply : {{md.post.children}}\n\n                            </p>\n\n                        </ion-card-content>\n\n                    </ion-card>\n\n                </div>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\music\music.html"*/,
             styleUrls: ['/src/pages/music/music.scss']
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -1046,9 +1050,179 @@ var MusicPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CatchPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(56);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var CatchPage = (function () {
+    function CatchPage(navCtrl, navParams, postStore, selectStore, modetore, alertCtrl) {
+        // If we navigated to this page, we will have an item available as a nav param
+        // this.selectedItem = navParams.get('item');
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.postStore = postStore;
+        this.selectStore = selectStore;
+        this.modetore = modetore;
+        this.alertCtrl = alertCtrl;
+        this.postList = [];
+        this.selectTag = 'all_all';
+        this.searchWord = '';
+        if (this.postStore == null || this.postStore == undefined) {
+            postStore = this.navParams.get('postStore');
+            selectStore = this.navParams.get('selectStore');
+        }
+        // console.log(postStore);
+        this.postInfoList = postStore.select(__WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__["a" /* getPosts */]);
+        this.selectTemp = selectStore.select(__WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__["a" /* getSelect */]);
+    }
+    CatchPage.prototype.optionSelected = function (event) {
+        console.log('-=-=-=-=optionSelected=-=-=-=-=-=');
+        console.log(event);
+        this.modetore.dispatch(new __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__["f" /* ModeAction */](String(event)));
+    };
+    CatchPage.prototype.onCancel = function (event) {
+        // console.log('-=-=-=-=onCancel=-=-=-=-=-=');
+        // console.log(event);
+    };
+    CatchPage.prototype.ngAfterContentInit = function () {
+        var _this = this;
+        this.postInfoList.subscribe(function (posts) {
+            // console.log(posts);
+            // this.dataSource = new MatTableDataSource(probes);
+            // this.dataSource.sort = this.sort;
+            // console.log(ttt);
+            _this.tempPostList = posts;
+            var ws = ["캐마", "캐치마인드", _this.searchWord];
+            _this.postList = __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__["d" /* searchWordsList */](ws, _this.tempPostList);
+            _this.postList = _this.filterCatch(_this.postList);
+            // this.postList = SearchUtil.searchList(this.searchWord, this.tempPostList);;
+            // if(posts.length > 0) {
+            //   if(posts[0].postList.length > 0) {
+            //     console.log(JSON.stringify(posts[0].postList[0]));
+            //   }
+            // }
+        }, function (error) {
+            console.log(error.message);
+        });
+        this.selectTemp.subscribe(function (st) {
+            // console.log(posts);
+            // this.dataSource = new MatTableDataSource(probes);
+            // this.dataSource.sort = this.sort;
+            console.log(st);
+            _this.selectTag = st;
+            // console.log(this.selectTag);
+            // let posts: PostInfo[] = [];
+            // posts.push(this.postList[0]);
+            // this.postStore.dispatch(new fromActions.PostAction(posts));
+            // console.log(this.selectTag);
+        }, function (error) {
+            console.log(error.message);
+        });
+    };
+    CatchPage.prototype.getItems = function (ev) {
+        this.searchWord = ev.target.value;
+        this.postList = __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__["b" /* searchList */](ev.target.value, this.tempPostList);
+    };
+    CatchPage.prototype.filterCatch = function (posts) {
+        if (posts === undefined || posts == null || posts.length <= 0) {
+            return null;
+        }
+        posts[0].tagMap.forEach(function (value, key) {
+            // if(value.root_title)
+            // indexOf
+            var searcharr = [];
+            for (var i = 0; i < value.length; ++i) {
+                var post = value[i];
+                var aFIdx = post.body.indexOf('"정답:');
+                if (aFIdx < 0) {
+                    continue;
+                }
+                var aLIdx = post.body.indexOf('"', '"정답:'.length + aFIdx);
+                var answer = post.body.substring(aFIdx + '"정답:'.length, aLIdx);
+                var rFIdx = post.body.indexOf('"정답자:', aLIdx);
+                if (rFIdx < 0) {
+                    continue;
+                }
+                var rLIdx = post.body.indexOf('"', '"정답자:'.length + rFIdx);
+                var ra = post.body.substring(rFIdx + '"정답자:'.length, rLIdx);
+                posts[0].catchMap.set(post.permlink, { answer: answer.trim(), righter: ra.trim() });
+                // console.log(posts[0].catchMap);
+                // if (post.root_title.indexOf([j]) >= 0) {
+                //   searcharr.push(post);
+                //   break;
+                // }
+            }
+        });
+        return posts;
+    };
+    CatchPage.prototype.viewAnswer = function (catchInfo) {
+        if (catchInfo == null || catchInfo == undefined) {
+            this.showAlertError('정답을 알수가 없습니다. 직접가서 확인해주세요.');
+            return;
+        }
+        this.showAlertAnswer(catchInfo.answer);
+    };
+    CatchPage.prototype.showAlertAnswer = function (msg) {
+        var alert = this.alertCtrl.create({
+            title: '정답은?',
+            subTitle: msg,
+            buttons: ['헐?']
+        });
+        alert.present();
+    };
+    CatchPage.prototype.showAlertError = function (msg) {
+        var alert = this.alertCtrl.create({
+            title: '죄송합니다.',
+            subTitle: msg,
+            buttons: ['인정']
+        });
+        alert.present();
+    };
+    CatchPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'catch-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\catch\catch.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Catch - Posts - all\n\n              </div>\n\n              <div *ngIf="selectTag != \'all_all\'">\n\n                Catch - Posts - {{selectTag}}\n\n              </div>\n\n        \n\n              <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                  <ion-option value=\'list\'>list</ion-option>\n\n                  <ion-option value=\'card\'>card</ion-option>\n\n                  <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                    <ion-option value=\'catch\'>catchmind</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n       \n\n    <ion-grid fixed>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <div *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <div *ngIf="post.json_metadata.image != undefined">\n\n            <ion-col *ngIf="post.children > 20">\n\n                <ion-card class="ion-card-small">\n\n                    <div *ngIf="post.json_metadata.image != undefined">\n\n                        <img src="{{post.json_metadata.image[0]}}">\n\n                    </div>\n\n\n\n                    <div class="card-title">\n\n                        <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                    </div>\n\n                    <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                    \n\n                    <div class="" *ngIf="postInfo.catchMap.get(post.permlink) != undefined">정답자 : {{postInfo.catchMap.get(post.permlink).righter}}</div>\n\n                    <button ion-button color="secondary" (click)="viewAnswer(postInfo.catchMap.get(post.permlink))">정답은 뭘까요?</button>\n\n\n\n                    <!-- <div class="card-subtitle" *ngIf="postInfo.catchMap.get(post.permlink) != undefined">정답 : {{postInfo.catchMap.get(post.permlink).answer}}</div> -->\n\n                </ion-card>\n\n            </ion-col>\n\n        </div>\n\n        </div>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\catch\catch.html"*/,
+            styleUrls: ['/src/pages/catch/catch.scss']
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */],
+            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */],
+            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], CatchPage);
+    return CatchPage;
+}());
+
+//# sourceMappingURL=catch.js.map
+
+/***/ }),
+
+/***/ 333:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(356);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1056,7 +1230,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 355:
+/***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1064,17 +1238,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(396);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(264);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngrx_store__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_reducers_reducers__ = __webpack_require__(612);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_reducers_reducers__ = __webpack_require__(613);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_card_card__ = __webpack_require__(329);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_real_card_real_card__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_music_music__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_catch_catch__ = __webpack_require__(613);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_catch_catch__ = __webpack_require__(332);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_storage__ = __webpack_require__(325);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1143,20 +1317,20 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 396:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(326);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngrx_store__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_reducers_post_reducer__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_reducers_author_reducer__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_reducers_author_reducer__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_reducers_getend_reducer__ = __webpack_require__(327);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ng_reducers_mode_reducer__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ng_actions_actions__ = __webpack_require__(21);
@@ -1164,6 +1338,9 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_real_card_real_card__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_music_music__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_commons_SearchUtil__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_catch_catch__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_lodash__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1189,7 +1366,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // import * as steem from "steem";
+
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen, postStore, authorStore, selectStore, getEndStore, modetore) {
         this.platform = platform;
@@ -1261,6 +1440,11 @@ var MyApp = (function () {
                 console.log("mode - music");
                 _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_14__pages_music_music__["a" /* MusicPage */]);
             }
+            else if (mode == "catch") {
+                console.log("mode - catch");
+                _this.selectStore.dispatch(new __WEBPACK_IMPORTED_MODULE_11__ng_actions_actions__["j" /* SelectAction */]('kr-gazua'));
+                _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_16__pages_catch_catch__["a" /* CatchPage */]);
+            }
         });
         this.postInfoList.subscribe(function (posts) {
             if (posts.length <= 0)
@@ -1289,7 +1473,8 @@ var MyApp = (function () {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
         console.log(page.tag);
-        this.selectStore.dispatch(new __WEBPACK_IMPORTED_MODULE_11__ng_actions_actions__["j" /* SelectAction */](page.tag));
+        var tag = __WEBPACK_IMPORTED_MODULE_17_lodash__["clone"](page.tag);
+        this.selectStore.dispatch(new __WEBPACK_IMPORTED_MODULE_11__ng_actions_actions__["j" /* SelectAction */](tag));
         this.nav.setRoot(page.component);
     };
     MyApp.prototype.getItems = function (ev) {
@@ -1395,35 +1580,28 @@ var getPosts = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSel
 
 /***/ }),
 
-/***/ 462:
+/***/ 463:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 469:
+/***/ 470:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 471:
+/***/ 472:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 485:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 521:
+/***/ 486:
 /***/ (function(module, exports) {
 
 /* (ignored) */
@@ -1431,6 +1609,13 @@ var getPosts = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSel
 /***/ }),
 
 /***/ 522:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 523:
 /***/ (function(module, exports) {
 
 /* (ignored) */
@@ -1483,7 +1668,7 @@ var getSelect = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSe
 /* harmony export (immutable) */ __webpack_exports__["d"] = searchWordsList;
 /* harmony export (immutable) */ __webpack_exports__["b"] = searchList;
 /* harmony export (immutable) */ __webpack_exports__["a"] = searchAddress;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 
 function searchTagList(searchWord, tempList) {
@@ -1674,14 +1859,14 @@ function checkEndIdx(body, startIdx) {
 
 /***/ }),
 
-/***/ 612:
+/***/ 613:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return reducers; });
 /* unused harmony export logger */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__post_reducer__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__author_reducer__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__author_reducer__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select_reducer__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getend_reducer__ = __webpack_require__(327);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mode_reducer__ = __webpack_require__(328);
@@ -1710,152 +1895,7 @@ function logger(reducer) {
 //   : [];
 //# sourceMappingURL=reducers.js.map
 
-/***/ }),
-
-/***/ 613:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CatchPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__ = __webpack_require__(56);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-var CatchPage = (function () {
-    function CatchPage(navCtrl, navParams, postStore, selectStore, modetore) {
-        // If we navigated to this page, we will have an item available as a nav param
-        // this.selectedItem = navParams.get('item');
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.postStore = postStore;
-        this.selectStore = selectStore;
-        this.modetore = modetore;
-        this.postList = [];
-        this.selectTag = 'all_all';
-        this.searchWord = '';
-        if (this.postStore == null || this.postStore == undefined) {
-            postStore = this.navParams.get('postStore');
-            selectStore = this.navParams.get('selectStore');
-        }
-        // console.log(postStore);
-        this.postInfoList = postStore.select(__WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_post_reducer__["a" /* getPosts */]);
-        this.selectTemp = selectStore.select(__WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_select_reducer__["a" /* getSelect */]);
-    }
-    CatchPage.prototype.optionSelected = function (event) {
-        console.log('-=-=-=-=optionSelected=-=-=-=-=-=');
-        console.log(event);
-        this.modetore.dispatch(new __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__["f" /* ModeAction */](String(event)));
-    };
-    CatchPage.prototype.onCancel = function (event) {
-        // console.log('-=-=-=-=onCancel=-=-=-=-=-=');
-        // console.log(event);
-    };
-    CatchPage.prototype.ngAfterContentInit = function () {
-        var _this = this;
-        this.postInfoList.subscribe(function (posts) {
-            // console.log(posts);
-            // this.dataSource = new MatTableDataSource(probes);
-            // this.dataSource.sort = this.sort;
-            // console.log(ttt);
-            _this.tempPostList = posts;
-            var ws = ["캐마", "캐치마인드", _this.searchWord];
-            _this.postList = __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__["d" /* searchWordsList */](ws, _this.tempPostList);
-            _this.postList = _this.filterCatch(_this.postList);
-            // this.postList = SearchUtil.searchList(this.searchWord, this.tempPostList);;
-            // if(posts.length > 0) {
-            //   if(posts[0].postList.length > 0) {
-            //     console.log(JSON.stringify(posts[0].postList[0]));
-            //   }
-            // }
-        }, function (error) {
-            console.log(error.message);
-        });
-        this.selectTemp.subscribe(function (st) {
-            // console.log(posts);
-            // this.dataSource = new MatTableDataSource(probes);
-            // this.dataSource.sort = this.sort;
-            console.log(st);
-            _this.selectTag = st;
-            // console.log(this.selectTag);
-            // let posts: PostInfo[] = [];
-            // posts.push(this.postList[0]);
-            // this.postStore.dispatch(new fromActions.PostAction(posts));
-            // console.log(this.selectTag);
-        }, function (error) {
-            console.log(error.message);
-        });
-    };
-    CatchPage.prototype.getItems = function (ev) {
-        this.searchWord = ev.target.value;
-        this.postList = __WEBPACK_IMPORTED_MODULE_6__app_commons_SearchUtil__["b" /* searchList */](ev.target.value, this.tempPostList);
-    };
-    CatchPage.prototype.filterCatch = function (posts) {
-        if (posts == null || posts.length <= 0) {
-            return null;
-        }
-        posts[0].tagMap.forEach(function (value, key) {
-            // if(value.root_title)
-            // indexOf
-            var searcharr = [];
-            for (var i = 0; i < value.length; ++i) {
-                var post = value[i];
-                var aFIdx = post.body.indexOf('"정답:');
-                if (aFIdx < 0) {
-                    continue;
-                }
-                var aLIdx = post.body.indexOf('"', '"정답:'.length + aFIdx);
-                var answer = post.body.substring(aFIdx, aLIdx);
-                var rFIdx = post.body.indexOf('"정답자:', aLIdx);
-                if (rFIdx < 0) {
-                    continue;
-                }
-                var rLIdx = post.body.indexOf('"', '"정답자:'.length + rFIdx);
-                var ra = post.body.substring(rFIdx, rLIdx);
-                posts[0].catchMap.set(post.permlink, { answer: answer, righter: ra });
-                console.log(posts[0].catchMap);
-                // if (post.root_title.indexOf([j]) >= 0) {
-                //   searcharr.push(post);
-                //   break;
-                // }
-            }
-        });
-        return posts;
-    };
-    CatchPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'catch-card',template:/*ion-inline-start:"D:\project\vscode\steemit\sibba\src\pages\catch\catch.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>\n\n            <div *ngIf="selectTag == \'all_all\'">\n\n                Catch - Posts - all\n\n              </div>\n\n              <div *ngIf="selectTag != \'all_all\'">\n\n                Catch - Posts - {{selectTag}}\n\n              </div>\n\n        \n\n              <ion-item>\n\n                <ion-label>Mode</ion-label>\n\n                <ion-select (ionChange)="optionSelected($event)">\n\n                  <ion-option value=\'list\'>list</ion-option>\n\n                  <ion-option value=\'card\'>card</ion-option>\n\n                  <!-- <div *ngIf="selectTag == \'kr-art\' || selectTag == \'kr-gazua\' || selectTag == \'catchmind\'"> -->\n\n                    <ion-option value=\'image\'>image</ion-option>\n\n                    <ion-option value=\'music\'>music</ion-option>\n\n                    <!-- </div> -->\n\n                </ion-select>\n\n              </ion-item>\n\n        </ion-title>\n\n        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n       \n\n    <ion-grid>\n\n        <ion-row *ngFor="let postInfo of postList">\n\n            <ion-col *ngFor="let post of postInfo.tagMap.get(selectTag)">\n\n                <ion-card class="ion-card-small">\n\n                    <div *ngIf="post.json_metadata.image != undefined ">\n\n                        <img src="https://steemitimages.com/200x0/{{post.json_metadata.image[0]}}">\n\n                    </div>\n\n\n\n                    <div class="card-title">\n\n                        <a href="https://steemit.com{{post.url}}" target="_blank">{{post.root_title}}</a>\n\n                    </div>\n\n                    <div class="card-subtitle">{{post.created}} Votes : {{post.net_votes}} , reply : {{post.children}}</div>\n\n                </ion-card>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\sibba\src\pages\catch\catch.html"*/,
-            styleUrls: ['/src/pages/catch/catch.scss']
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */],
-            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */],
-            __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */]])
-    ], CatchPage);
-    return CatchPage;
-}());
-
-//# sourceMappingURL=catch.js.map
-
 /***/ })
 
-},[332]);
+},[333]);
 //# sourceMappingURL=main.js.map
