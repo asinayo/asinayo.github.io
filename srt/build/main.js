@@ -316,12 +316,14 @@ var ListPage = /** @class */ (function () {
     ListPage.prototype.ngAfterContentInit = function () {
         var _this = this;
         this.talks$.subscribe(function (talkInfo) {
-            _this.pageMap.clear();
-            _this.talkInfos = [];
-            _this.talkInfos.push(talkInfo);
-            _this.allTalkInfos.push(talkInfo);
-            _this.processOther(talkInfo);
-            _this.processDatePage(talkInfo);
+            if (talkInfo != undefined && talkInfo != null) {
+                _this.pageMap.clear();
+                _this.talkInfos = [];
+                _this.talkInfos.push(talkInfo);
+                _this.allTalkInfos.push(talkInfo);
+                _this.processOther(talkInfo);
+                _this.processDatePage(talkInfo);
+            }
             // console.log(talkInfo.talkList[0]);
         });
     };
@@ -329,6 +331,9 @@ var ListPage = /** @class */ (function () {
         this.rangeDate = this.getTotalRange(talk);
     };
     ListPage.prototype.getTotalRange = function (talk) {
+        if (talk.talkList == undefined || talk.talkList == null || talk.talkList.length <= 0) {
+            return '';
+        }
         var start = __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__["a" /* convertDate */]((talk.talkList[0])[1].timestamp);
         var end = __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__["a" /* convertDate */]((talk.talkList[talk.talkList.length - 1])[1].timestamp);
         var fileName = '';
