@@ -307,18 +307,68 @@ var ListPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.talkStore = talkStore;
         this.talkInfos = [];
+        this.allTalkInfos = [];
+        this.pageInfos = [];
+        this.pageMap = new Map();
+        this.rangeDate = '';
         this.talks$ = talkStore.select(__WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_talk_reducer__["a" /* getTalk */]);
     }
     ListPage.prototype.ngAfterContentInit = function () {
         var _this = this;
         this.talks$.subscribe(function (talkInfo) {
+            _this.pageMap.clear();
+            _this.talkInfos = [];
             _this.talkInfos.push(talkInfo);
-            console.log(talkInfo.talkList[0]);
+            _this.allTalkInfos.push(talkInfo);
+            _this.processOther(talkInfo);
+            _this.processDatePage(talkInfo);
+            // console.log(talkInfo.talkList[0]);
         });
+    };
+    ListPage.prototype.processOther = function (talk) {
+        this.rangeDate = this.getTotalRange(talk);
+    };
+    ListPage.prototype.getTotalRange = function (talk) {
+        var start = __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__["a" /* convertDate */]((talk.talkList[0])[1].timestamp);
+        var end = __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__["a" /* convertDate */]((talk.talkList[talk.talkList.length - 1])[1].timestamp);
+        var fileName = '';
+        fileName += start;
+        fileName += ' ~ ';
+        fileName += end;
+        return fileName;
+    };
+    ListPage.prototype.processDatePage = function (talkInfo) {
+        if (talkInfo == undefined || talkInfo == null) {
+            return;
+        }
+        var td = this.getTotalRange(talkInfo);
+        this.pageMap.set(td, talkInfo.talkList);
+        for (var _i = 0, _a = talkInfo.talkList; _i < _a.length; _i++) {
+            var talk = _a[_i];
+            var date = __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__["a" /* convertDate */](talk[1].timestamp);
+            if (this.pageMap.has(date.toString()) == false) {
+                this.pageMap.set(date.toString(), []);
+            }
+            this.pageMap.get(date.toString()).push(talk);
+        }
+        var _this = this;
+        this.pageMap.forEach(function (value, key) {
+            _this.pageInfos.push({
+                label: key,
+                key: key
+            });
+        });
+    };
+    ListPage.prototype.optionSelected = function (event) {
+        var tl = this.pageMap.get(event);
+        this.rangeDate = event;
+        // console.log(tl);
+        this.talkInfos[0].talkList = tl;
+        // console.log(event);
     };
     ListPage.prototype.ccopy = function () {
         var copyData = '';
-        for (var _i = 0, _a = this.talkInfos; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.allTalkInfos; _i < _a.length; _i++) {
             var talkInfo = _a[_i];
             for (var _b = 0, _c = talkInfo.talkList; _b < _c.length; _b++) {
                 var it = _c[_b];
@@ -334,7 +384,7 @@ var ListPage = /** @class */ (function () {
         this.download(copyData);
     };
     ListPage.prototype.download = function (data) {
-        var talk = this.talkInfos[0];
+        var talk = this.allTalkInfos[0];
         var fileName = '';
         fileName += talk.youId;
         fileName += '-';
@@ -362,7 +412,7 @@ var ListPage = /** @class */ (function () {
     };
     ListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\list\list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n\n    <button ion-button (click)="ccopy()">\n        추억을.. 내 컴퓨터에 저 장\n      </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list class="srtlist" *ngFor="let talkInfo of talkInfos">\n    <ng-container *ngFor="let talk of talkInfo.talkList">\n      <ion-card>\n        <ion-card-header>\n          {{talk[1].op[1].author}} - <a href="https://steemit.com/{{talk[1].op[1].json_metadata.tags[0]}}/@{{talk[1].op[1].parent_author}}/{{talk[1].op[1].parent_permlink}}/" target="_blank">{{talk[1].timestamp}}</a>\n          \n         \n        </ion-card-header>\n        <ion-card-content>\n          <div [innerHtml]="talk[1].op[1].body"></div>\n                \n        </ion-card-content>\n      </ion-card>\n    </ng-container>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\list\list.html"*/
+            selector: 'page-list',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\list\list.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n       \n        <ion-list>\n          <ion-item style="min-width: \'30%\'">\n            <ion-label> {{rangeDate}}</ion-label>\n            <ion-select (ionChange)="optionSelected($event)">\n              <ng-container *ngFor="let pi of pageInfos" >\n                  <ion-option value="{{pi.key}}">{{pi.label}}</ion-option>\n              </ng-container>\n              \n              <!-- <ion-option value="n64">Nintendo64</ion-option>\n              <ion-option value="ps">PlayStation</ion-option>\n              <ion-option value="genesis">Sega Genesis</ion-option>\n              <ion-option value="saturn">Sega Saturn</ion-option>\n              <ion-option value="snes">SNES</ion-option> -->\n            </ion-select>\n          </ion-item>\n        </ion-list>\n        <button ion-button (click)="ccopy()">\n            추억을.. 내 컴퓨터에 저장\n          </button>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list class="srtlist" *ngFor="let talkInfo of talkInfos">\n    <ng-container *ngFor="let talk of talkInfo.talkList">\n      <ion-card>\n        <ion-card-header>\n          {{talk[1].op[1].author}} -\n          <a href="https://steemit.com/{{talk[1].op[1].json_metadata.tags[0]}}/@{{talk[1].op[1].parent_author}}/{{talk[1].op[1].parent_permlink}}/"\n            target="_blank">{{talk[1].timestamp}}</a>\n\n\n        </ion-card-header>\n        <ion-card-content>\n          <div [innerHtml]="talk[1].op[1].body"></div>\n\n        </ion-card-content>\n      </ion-card>\n    </ng-container>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\list\list.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["a" /* Store */]])
     ], ListPage);
