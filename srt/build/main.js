@@ -79,14 +79,14 @@ webpackEmptyAsyncContext.id = 216;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_steem__ = __webpack_require__(398);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_steem__ = __webpack_require__(399);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_steem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_steem__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngrx_store__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_ng_reducers_mode_reducer__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_ng_actions_actions__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_ng_actions_srtActions__ = __webpack_require__(321);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_showdown__ = __webpack_require__(603);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_showdown__ = __webpack_require__(604);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_showdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_showdown__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__fulist_fulist__ = __webpack_require__(323);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -305,6 +305,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.processView = function (map, fList) {
         var testViewList = [];
+        var tesDataList = [];
         for (var i = 0; i < fList.length; ++i) {
             var ff = fList[i];
             var fuInfoMe = this.getMapData(this.fuId, ff, map);
@@ -334,7 +335,15 @@ var HomePage = /** @class */ (function () {
             str += '<td class="tg-us36">vote : ' + fuInfoFollow.vote.timestamp + '</td>';
             str += '</tr>';
             str += '</table>';
+            var dd = {
+                mecmt: fuInfoMe.comment.timestamp,
+                mevote: fuInfoMe.vote.timestamp,
+                txt: this.fuId + ' ♡ ' + ff,
+                fcmt: fuInfoFollow.comment.timestamp,
+                fvote: fuInfoFollow.vote.timestamp
+            };
             testViewList.push(str);
+            // tesDataList.push(dd);
         }
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__fulist_fulist__["a" /* FUListPage */], {
             data: testViewList
@@ -358,12 +367,11 @@ var HomePage = /** @class */ (function () {
                 return;
             }
             list.push.apply(list, result);
-            if (result.length >= 10000) {
-                _this.reqAccountHistory(id, result[0][0], list, func);
-            }
-            else {
-                func(list);
-            }
+            // if(result.length >= 10000) {
+            //   _this.reqAccountHistory(id, result[0][0], list, func);
+            // } else {
+            func(list);
+            // }
             // _this.parseTalk(result);
         });
     };
@@ -386,7 +394,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content justify-content-center align-items-center>\n\n  <ion-slides pager>\n\n    <ion-slide>\n      <form (ngSubmit)="search()">\n        <ion-grid fixed>\n          <ion-item float="left">\n            <ion-label color="primary" floating>너의 이름은..</ion-label>\n            <ion-input [(ngModel)]="youId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <ion-item float="left">\n            <ion-label color="primary" floating>친구의 이름은..</ion-label>\n            <ion-input [(ngModel)]="friendId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <button float="left" ion-button round outline type="submit" item-right>Search</button>\n        </ion-grid>\n      </form>\n\n      <ion-grid>\n        <ion-row justify-content-center align-items-center style="height: 100%">\n          <ion-list class="history-list">\n            <ion-item class="item-css" *ngFor="let his of histories" (click)="searchHistory(his)">\n              <!-- <ion-avatar item-start> -->\n              <ion-avatar item-start>\n                <img src="https://steemitimages.com/u/{{his.youId}}/avatar">\n              </ion-avatar>\n\n              <!-- </ion-avatar> -->\n              <h2>{{his.youId}} ♡ {{his.friendId}}</h2>\n              <h3>count - {{his.count}}</h3>\n              <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n              <!-- <ion-avatar item-start>\n                                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                              </ion-avatar> -->\n\n              <ion-avatar item-end>\n                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n              </ion-avatar>\n            </ion-item>\n          </ion-list>\n        </ion-row>\n      </ion-grid>\n    </ion-slide>\n\n    <ion-slide >\n        <form (ngSubmit)="searchFollow()">\n            <ion-grid fixed>\n              <ion-item float="left">\n                <ion-label color="primary" floating>관심받고 싶은 사람은 누구..?</ion-label>\n                <ion-input [(ngModel)]="fuId" [ngModelOptions]="{standalone: true}"></ion-input>\n              </ion-item>\n              <button float="left" ion-button round outline type="submit" item-right>Search</button>\n            </ion-grid>\n          </form>\n\n          <!-- <ion-grid>\n            <ion-row justify-content-center align-items-center style="height: 50%">\n              <ion-list class="history-list">\n                <ion-item class="item-css" *ngFor="let his of fuList" > -->\n                  <!-- <ion-avatar item-start> -->\n                  <!-- <ion-avatar item-start>\n                    <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n                  </ion-avatar> -->\n    \n                  <!-- </ion-avatar> -->\n                  <!-- <h2>{{fuId}} ♡ {{his}}</h2> -->\n                  <!-- <h3>count - {{his}}</h3> -->\n                  <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n                  <!-- <ion-avatar item-start>\n                                    <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                                  </ion-avatar> -->\n    \n                  <!-- <ion-avatar item-end>\n                    <img src="https://steemitimages.com/u/{{his}}/avatar">\n                  </ion-avatar>\n                </ion-item>\n              </ion-list>\n            </ion-row>\n          </ion-grid> -->\n\n    </ion-slide>\n\n\n  </ion-slides>\n\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-grid fixed>\n  <ion-slides pager>\n\n    <ion-slide>\n      <form (ngSubmit)="search()">\n        <ion-grid fixed>\n          <ion-item float="left">\n            <ion-label color="primary" floating>너의 이름은..</ion-label>\n            <ion-input [(ngModel)]="youId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <ion-item float="left">\n            <ion-label color="primary" floating>친구의 이름은..</ion-label>\n            <ion-input [(ngModel)]="friendId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <button float="left" ion-button round outline type="submit" item-right>Search</button>\n        </ion-grid>\n      </form>\n\n      <ion-grid>\n        <ion-row justify-content-center align-items-center style="height: 100%">\n          <ion-list class="history-list">\n            <ion-item class="item-css" *ngFor="let his of histories" (click)="searchHistory(his)">\n              <!-- <ion-avatar item-start> -->\n              <ion-avatar item-start>\n                <img src="https://steemitimages.com/u/{{his.youId}}/avatar">\n              </ion-avatar>\n\n              <!-- </ion-avatar> -->\n              <h2>{{his.youId}} ♡ {{his.friendId}}</h2>\n              <h3>count - {{his.count}}</h3>\n              <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n              <!-- <ion-avatar item-start>\n                                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                              </ion-avatar> -->\n\n              <ion-avatar item-end>\n                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n              </ion-avatar>\n            </ion-item>\n          </ion-list>\n        </ion-row>\n      </ion-grid>\n    </ion-slide>\n\n    <ion-slide >\n        <form (ngSubmit)="searchFollow()">\n              <ion-item float="left">\n                <ion-label color="primary" floating>관심받고 싶은 사람은 누구..?</ion-label>\n                <ion-input [(ngModel)]="fuId" [ngModelOptions]="{standalone: true}"></ion-input>\n              </ion-item>\n              <button float="left" ion-button round outline type="submit" item-right>Search</button>\n            </form>\n\n          <!-- <ion-grid>\n            <ion-row justify-content-center align-items-center style="height: 50%">\n              <ion-list class="history-list">\n                <ion-item class="item-css" *ngFor="let his of fuList" > -->\n                  <!-- <ion-avatar item-start> -->\n                  <!-- <ion-avatar item-start>\n                    <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n                  </ion-avatar> -->\n    \n                  <!-- </ion-avatar> -->\n                  <!-- <h2>{{fuId}} ♡ {{his}}</h2> -->\n                  <!-- <h3>count - {{his}}</h3> -->\n                  <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n                  <!-- <ion-avatar item-start>\n                                    <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                                  </ion-avatar> -->\n    \n                  <!-- <ion-avatar item-end>\n                    <img src="https://steemitimages.com/u/{{his}}/avatar">\n                  </ion-avatar>\n                </ion-item>\n              </ion-list>\n            </ion-row>\n          </ion-grid> -->\n\n    </ion-slide>\n\n\n  </ion-slides>\n</ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["a" /* Store */],
@@ -428,6 +436,7 @@ var TalkAction = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FUListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__ = __webpack_require__(324);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -439,16 +448,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var FUListPage = /** @class */ (function () {
     function FUListPage(navCtrl, params) {
         this.navCtrl = navCtrl;
+        this.oriList = [];
         this.dataList = params.get('data');
     }
     FUListPage.prototype.ngAfterContentInit = function () {
     };
+    FUListPage.prototype.optionSelected = function (event) {
+        console.log(event);
+        this.sortsort(Number(event));
+    };
+    FUListPage.prototype.sortsort = function (flag) {
+        var _this = this;
+        this.dataList.sort(function (a, b) {
+            var retValue = -1;
+            var cmpA = _this.getTime(a, flag);
+            var cmpB = _this.getTime(b, flag);
+            if (cmpA == undefined && cmpB == undefined) {
+                return retValue * -1;
+            }
+            if (cmpA == undefined) {
+                return retValue * -1;
+            }
+            if (cmpB == undefined) {
+                return retValue;
+            }
+            cmpA = __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__["a" /* convertDate */](cmpA);
+            cmpB = __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__["a" /* convertDate */](cmpB);
+            var cmpAL = cmpA.split('-');
+            var cmpBL = cmpB.split('-');
+            var date_a = new Date(cmpAL[0], cmpAL[1] - 1, cmpAL[2]);
+            var date_b = new Date(cmpBL[0], cmpBL[1] - 1, cmpBL[2]);
+            if (date_a > date_b) {
+                return retValue;
+            }
+            if (date_a < date_b) {
+                return retValue * -1;
+            }
+            // if (Number(cmpAL[1]) > Number(cmpBL[1])) {
+            //   return retValue * -1;
+            // }
+            // if (Number(cmpAL[2]) >= Number(cmpBL[2])) {
+            //   return retValue * -1;
+            // }
+            return retValue;
+            // if (a.count > b.count) {
+            //   return 1 * flag;
+            // } else {
+            //   return -1 * flag;
+            // }
+        });
+    };
+    FUListPage.prototype.getTime = function (data, flag) {
+        switch (flag) {
+            case 1:
+                return data.mecmt;
+            case 2:
+                return data.mevote;
+            case 3:
+                return data.fcmt;
+            case 4:
+                return data.fvote;
+        }
+    };
+    FUListPage.prototype.genTable = function (dd) {
+        var str = '';
+        str = '<table class="tg">';
+        str += '<tr>';
+        str += '<th class="tg-us36">comment : ' + dd.mecmt + '</th>';
+        str += '<th class="tg-us36" colspan="3" rowspan="2">' + dd.txt + '</th>';
+        str += '<th class="tg-us36">comment : ' + dd.fcmt + '</th>';
+        str += '</tr>';
+        str += '<tr>';
+        str += '<td class="tg-us36">vote : ' + dd.mevote + '</td>';
+        str += '<td class="tg-us36">vote : ' + dd.fvote + '</td>';
+        str += '</tr>';
+        str += '</table>';
+    };
     FUListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n       \n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-grid>\n        <ion-row justify-content-center align-items-center >\n  <ion-list class="history-list">\n    <ion-item class="item-css" *ngFor="let his of dataList" >\n      <!-- <ion-avatar item-start> -->\n      <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n      <!-- </ion-avatar> -->\n      <!-- <h2>{{his}}</h2> -->\n      <div [innerHtml]="his"></div>\n      <!-- <h3>count - {{his}}</h3> -->\n      <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n      <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n      <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n    </ion-item>\n  </ion-list>\n</ion-row></ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
+            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n\n        <!-- <ion-item>\n          <ion-label>정렬</ion-label>\n          <ion-select (ionChange)="optionSelected($event)">\n              <ion-option value=\'1\'>내 코멘트</ion-option>\n              <ion-option value=\'2\'>내 보팅</ion-option>\n              <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n              <ion-option value=\'4\'>팔로우 보팅</ion-option>\n          </ion-select>\n      </ion-item> -->\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-grid>\n        <ion-row justify-content-center align-items-center >\n  <ion-list class="history-list">\n    <ion-item class="item-css" *ngFor="let his of dataList" >\n      <!-- <ion-avatar item-start> -->\n      <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n      <!-- </ion-avatar> -->\n      <!-- <h2>{{his}}</h2> -->\n      <div [innerHtml]="his"></div>\n      <!-- <h3>count - {{his}}</h3> -->\n      <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n      <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n      <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n    </ion-item>\n  </ion-list>\n</ion-row></ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
     ], FUListPage);
@@ -463,12 +545,29 @@ var FUListPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = convertDate;
+function convertDate(date) {
+    var index = String(date).indexOf('T');
+    if (index < 0) {
+        return date;
+    }
+    var retDate = String(date).substring(0, index);
+    return retDate;
+}
+//# sourceMappingURL=StringUtil.js.map
+
+/***/ }),
+
+/***/ 325:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_talk_reducer__ = __webpack_require__(325);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__ = __webpack_require__(604);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_ng_reducers_talk_reducer__ = __webpack_require__(326);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_commons_StringUtil__ = __webpack_require__(324);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -622,7 +721,7 @@ var ListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 325:
+/***/ 326:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -660,13 +759,13 @@ var getTalk = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSele
 
 /***/ }),
 
-/***/ 326:
+/***/ 327:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(349);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -674,7 +773,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 348:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -682,9 +781,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(390);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(325);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_reducers_reducers__ = __webpack_require__(605);
@@ -749,7 +848,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 389:
+/***/ 390:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -759,7 +858,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(325);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngrx_store__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_reducers_mode_reducer__ = __webpack_require__(164);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -834,35 +933,28 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 436:
+/***/ 437:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 442:
+/***/ 443:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 444:
+/***/ 445:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 458:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 493:
+/***/ 459:
 /***/ (function(module, exports) {
 
 /* (ignored) */
@@ -870,6 +962,13 @@ var MyApp = /** @class */ (function () {
 /***/ }),
 
 /***/ 494:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 495:
 /***/ (function(module, exports) {
 
 /* (ignored) */
@@ -939,23 +1038,6 @@ var ModeAction = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 604:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = convertDate;
-function convertDate(date) {
-    var index = String(date).indexOf('T');
-    if (index < 0) {
-        return date;
-    }
-    var retDate = String(date).substring(0, index);
-    return retDate;
-}
-//# sourceMappingURL=StringUtil.js.map
-
-/***/ }),
-
 /***/ 605:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -967,7 +1049,7 @@ function convertDate(date) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select_reducer__ = __webpack_require__(608);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getend_reducer__ = __webpack_require__(609);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mode_reducer__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__talk_reducer__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__talk_reducer__ = __webpack_require__(326);
 
 
 
@@ -1149,5 +1231,5 @@ var getGetEnd = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSe
 
 /***/ })
 
-},[326]);
+},[327]);
 //# sourceMappingURL=main.js.map
