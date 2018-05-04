@@ -89,6 +89,7 @@ webpackEmptyAsyncContext.id = 216;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_showdown__ = __webpack_require__(604);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_showdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_showdown__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__fulist_fulist__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__ = __webpack_require__(324);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,6 +99,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -335,18 +337,19 @@ var HomePage = /** @class */ (function () {
             str += '<td class="tg-us36">vote : ' + fuInfoFollow.vote.timestamp + '</td>';
             str += '</tr>';
             str += '</table>';
+            // StringUtil.convertDate(cmpB)
             var dd = {
-                mecmt: fuInfoMe.comment.timestamp,
-                mevote: fuInfoMe.vote.timestamp,
+                mecmt: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoMe.comment.timestamp),
+                mevote: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoMe.vote.timestamp),
                 txt: this.fuId + ' ♡ ' + ff,
-                fcmt: fuInfoFollow.comment.timestamp,
-                fvote: fuInfoFollow.vote.timestamp
+                fcmt: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoFollow.comment.timestamp),
+                fvote: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoFollow.vote.timestamp)
             };
-            testViewList.push(str);
-            // tesDataList.push(dd);
+            // testViewList.push(str);
+            tesDataList.push(dd);
         }
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__fulist_fulist__["a" /* FUListPage */], {
-            data: testViewList
+            data: tesDataList
         });
     };
     HomePage.prototype.setMapData = function (sender, receiver, fuInfo, map) {
@@ -436,7 +439,8 @@ var TalkAction = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FUListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(605);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -452,13 +456,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FUListPage = /** @class */ (function () {
     function FUListPage(navCtrl, params) {
         this.navCtrl = navCtrl;
-        this.oriList = [];
         this.dataList = params.get('data');
+        this.oriList = __WEBPACK_IMPORTED_MODULE_2_lodash__["clone"](this.dataList);
     }
     FUListPage.prototype.ngAfterContentInit = function () {
     };
     FUListPage.prototype.optionSelected = function (event) {
         console.log(event);
+        if (Number(event) == 0) {
+            this.dataList = __WEBPACK_IMPORTED_MODULE_2_lodash__["clone"](this.oriList);
+            return;
+        }
         this.sortsort(Number(event));
     };
     FUListPage.prototype.sortsort = function (flag) {
@@ -476,8 +484,8 @@ var FUListPage = /** @class */ (function () {
             if (cmpB == undefined) {
                 return retValue;
             }
-            cmpA = __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__["a" /* convertDate */](cmpA);
-            cmpB = __WEBPACK_IMPORTED_MODULE_2__app_commons_StringUtil__["a" /* convertDate */](cmpB);
+            // cmpA = StringUtil.convertDate(cmpA);
+            // cmpB = StringUtil.convertDate(cmpB);
             var cmpAL = cmpA.split('-');
             var cmpBL = cmpB.split('-');
             var date_a = new Date(cmpAL[0], cmpAL[1] - 1, cmpAL[2]);
@@ -530,7 +538,7 @@ var FUListPage = /** @class */ (function () {
     };
     FUListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n\n        <!-- <ion-item>\n          <ion-label>정렬</ion-label>\n          <ion-select (ionChange)="optionSelected($event)">\n              <ion-option value=\'1\'>내 코멘트</ion-option>\n              <ion-option value=\'2\'>내 보팅</ion-option>\n              <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n              <ion-option value=\'4\'>팔로우 보팅</ion-option>\n          </ion-select>\n      </ion-item> -->\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-grid>\n        <ion-row justify-content-center align-items-center >\n  <ion-list class="history-list">\n    <ion-item class="item-css" *ngFor="let his of dataList" >\n      <!-- <ion-avatar item-start> -->\n      <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n      <!-- </ion-avatar> -->\n      <!-- <h2>{{his}}</h2> -->\n      <div [innerHtml]="his"></div>\n      <!-- <h3>count - {{his}}</h3> -->\n      <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n      <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n      <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n    </ion-item>\n  </ion-list>\n</ion-row></ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
+            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n\n        <ion-item>\n          <ion-label>정렬</ion-label>\n          <ion-select (ionChange)="optionSelected($event)">\n              <ion-option value=\'0\'>아이디 순</ion-option>\n              <ion-option value=\'1\'>내 코멘트</ion-option>\n              <ion-option value=\'2\'>내 보팅</ion-option>\n              <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n              <ion-option value=\'4\'>팔로우 보팅</ion-option>\n          </ion-select>\n      </ion-item>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-list class="history-list">\n\n        <ion-grid>\n          <ion-row *ngFor="let his of dataList">\n            <ion-col >\n              <div>reply : {{his.mecmt}}\n                <br>vote : {{his.mevote}} </div>\n            </ion-col>\n            <ion-col>\n              <div>{{his.txt}}</div>\n            </ion-col>\n            <ion-col>\n              <div>reply : {{his.fcmt}}\n                <br>vote : {{his.fvote}}</div>\n            </ion-col>\n            \n          </ion-row>\n        </ion-grid>\n        <!-- <ion-item class="item-css" *ngFor="let his of dataList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{his}}</h2> -->\n        <!-- <div [innerHtml]="his"></div> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n        <!-- </ion-item> -->\n      </ion-list>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
     ], FUListPage);
@@ -786,7 +794,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(325);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(259);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_reducers_reducers__ = __webpack_require__(605);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_reducers_reducers__ = __webpack_require__(606);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngrx_store__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_fulist_fulist__ = __webpack_require__(323);
@@ -1038,16 +1046,16 @@ var ModeAction = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 605:
+/***/ 606:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return reducers; });
 /* unused harmony export logger */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__post_reducer__ = __webpack_require__(606);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__author_reducer__ = __webpack_require__(607);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select_reducer__ = __webpack_require__(608);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getend_reducer__ = __webpack_require__(609);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__post_reducer__ = __webpack_require__(607);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__author_reducer__ = __webpack_require__(608);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select_reducer__ = __webpack_require__(609);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getend_reducer__ = __webpack_require__(610);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mode_reducer__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__talk_reducer__ = __webpack_require__(326);
 
@@ -1079,7 +1087,7 @@ function logger(reducer) {
 
 /***/ }),
 
-/***/ 606:
+/***/ 607:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1117,7 +1125,7 @@ var getPosts = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSel
 
 /***/ }),
 
-/***/ 607:
+/***/ 608:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1155,7 +1163,7 @@ var getAuthor = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSe
 
 /***/ }),
 
-/***/ 608:
+/***/ 609:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1193,7 +1201,7 @@ var getSelect = Object(__WEBPACK_IMPORTED_MODULE_0__ngrx_store__["d" /* createSe
 
 /***/ }),
 
-/***/ 609:
+/***/ 610:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

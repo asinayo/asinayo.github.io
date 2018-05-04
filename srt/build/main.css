@@ -25678,6 +25678,14 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.col {
+  background-color: #f0f5ff;
+  border: 1px solid #e6e9ee;
+  border-radius: 2px;
+  padding: 5px;
+  text-align: center;
+}
+
 .history-list {
   -webkit-align-content: center !important;
   -ms-flex-line-pack: center !important;
