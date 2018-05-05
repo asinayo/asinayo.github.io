@@ -397,7 +397,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-grid fixed>\n  <ion-slides pager>\n\n    <ion-slide>\n      <form (ngSubmit)="search()">\n        <ion-grid fixed>\n          <ion-item float="left">\n            <ion-label color="primary" floating>너의 이름은..</ion-label>\n            <ion-input [(ngModel)]="youId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <ion-item float="left">\n            <ion-label color="primary" floating>친구의 이름은..</ion-label>\n            <ion-input [(ngModel)]="friendId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <button float="left" ion-button round outline type="submit" item-right>Search</button>\n        </ion-grid>\n      </form>\n\n      <ion-grid>\n        <ion-row justify-content-center align-items-center style="height: 100%">\n          <ion-list class="history-list">\n            <ion-item class="item-css" *ngFor="let his of histories" (click)="searchHistory(his)">\n              <!-- <ion-avatar item-start> -->\n              <ion-avatar item-start>\n                <img src="https://steemitimages.com/u/{{his.youId}}/avatar">\n              </ion-avatar>\n\n              <!-- </ion-avatar> -->\n              <h2>{{his.youId}} ♡ {{his.friendId}}</h2>\n              <h3>count - {{his.count}}</h3>\n              <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n              <!-- <ion-avatar item-start>\n                                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                              </ion-avatar> -->\n\n              <ion-avatar item-end>\n                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n              </ion-avatar>\n            </ion-item>\n          </ion-list>\n        </ion-row>\n      </ion-grid>\n    </ion-slide>\n\n    <ion-slide >\n        <form (ngSubmit)="searchFollow()">\n              <ion-item float="left">\n                <ion-label color="primary" floating>관심받고 싶은 사람은 누구..?</ion-label>\n                <ion-input [(ngModel)]="fuId" [ngModelOptions]="{standalone: true}"></ion-input>\n              </ion-item>\n              <button float="left" ion-button round outline type="submit" item-right>Search</button>\n            </form>\n\n          <!-- <ion-grid>\n            <ion-row justify-content-center align-items-center style="height: 50%">\n              <ion-list class="history-list">\n                <ion-item class="item-css" *ngFor="let his of fuList" > -->\n                  <!-- <ion-avatar item-start> -->\n                  <!-- <ion-avatar item-start>\n                    <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n                  </ion-avatar> -->\n    \n                  <!-- </ion-avatar> -->\n                  <!-- <h2>{{fuId}} ♡ {{his}}</h2> -->\n                  <!-- <h3>count - {{his}}</h3> -->\n                  <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n                  <!-- <ion-avatar item-start>\n                                    <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                                  </ion-avatar> -->\n    \n                  <!-- <ion-avatar item-end>\n                    <img src="https://steemitimages.com/u/{{his}}/avatar">\n                  </ion-avatar>\n                </ion-item>\n              </ion-list>\n            </ion-row>\n          </ion-grid> -->\n\n    </ion-slide>\n\n\n  </ion-slides>\n</ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid fixed>\n    <ion-slides pager>\n\n      <ion-slide>\n        <br/>\n        \n         <img src="assets/imgs/logo01.png" />\n        \n        <!-- <div hide show-xs flex>\n            <img src="assets/imgs/logo02.png" />\n        </div> -->\n\n        <form (ngSubmit)="search()">\n          <ion-grid fixed>\n            <ion-item float="left">\n              <ion-label color="primary" floating>너의 이름은..</ion-label>\n              <ion-input [(ngModel)]="youId" [ngModelOptions]="{standalone: true}"></ion-input>\n            </ion-item>\n            <ion-item float="left">\n              <ion-label color="primary" floating>친구의 이름은..</ion-label>\n              <ion-input [(ngModel)]="friendId" [ngModelOptions]="{standalone: true}"></ion-input>\n            </ion-item>\n            <button float="left" ion-button round outline type="submit" item-right>Search</button>\n          </ion-grid>\n        </form>\n\n        <ion-grid>\n          <ion-row justify-content-center align-items-center>\n            <ion-list class="history-list">\n              <ion-item class="item-css" *ngFor="let his of histories" (click)="searchHistory(his)">\n                <!-- <ion-avatar item-start> -->\n                <ion-avatar item-start>\n                  <img src="https://steemitimages.com/u/{{his.youId}}/avatar">\n                </ion-avatar>\n\n                <!-- </ion-avatar> -->\n                <h2>{{his.youId}} ♡ {{his.friendId}}</h2>\n                <h3>count - {{his.count}}</h3>\n                <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n                <!-- <ion-avatar item-start>\n                                <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                              </ion-avatar> -->\n\n                <ion-avatar item-end>\n                  <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                </ion-avatar>\n              </ion-item>\n            </ion-list>\n          </ion-row>\n        </ion-grid>\n      </ion-slide>\n\n      <ion-slide>\n        <form (ngSubmit)="searchFollow()">\n          <ion-item float="left">\n            <ion-label color="primary" floating>관심받고 싶은 사람은 누구..?</ion-label>\n            <ion-input [(ngModel)]="fuId" [ngModelOptions]="{standalone: true}"></ion-input>\n          </ion-item>\n          <button float="left" ion-button round outline type="submit" item-right>Search</button>\n        </form>\n\n        <!-- <ion-grid>\n            <ion-row justify-content-center align-items-center style="height: 50%">\n              <ion-list class="history-list">\n                <ion-item class="item-css" *ngFor="let his of fuList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n                    <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n                  </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{fuId}} ♡ {{his}}</h2> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                                    <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                                  </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n                    <img src="https://steemitimages.com/u/{{his}}/avatar">\n                  </ion-avatar>\n                </ion-item>\n              </ion-list>\n            </ion-row>\n          </ion-grid> -->\n\n      </ion-slide>\n\n\n    </ion-slides>\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["a" /* Store */],
@@ -456,9 +456,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FUListPage = /** @class */ (function () {
     function FUListPage(navCtrl, params) {
         this.navCtrl = navCtrl;
+        this.reverseIdx = -1;
+        this.currentFlag = 0;
+        this.sortOptions = [];
         this.dataList = params.get('data');
         this.oriList = __WEBPACK_IMPORTED_MODULE_2_lodash__["clone"](this.dataList);
     }
+    FUListPage.prototype.ngOnInit = function () {
+        this.sortOptions.push({ value: 0, label: '아이디 순' });
+        this.sortOptions.push({ value: 1, label: '내 코멘트' });
+        this.sortOptions.push({ value: 2, label: '내 보팅' });
+        this.sortOptions.push({ value: 3, label: '팔로우 코멘트' });
+        this.sortOptions.push({ value: 4, label: '팔로우 보팅' });
+        this.sortLabel = this.sortOptions[0];
+    };
     FUListPage.prototype.ngAfterContentInit = function () {
     };
     FUListPage.prototype.optionSelected = function (event) {
@@ -468,21 +479,27 @@ var FUListPage = /** @class */ (function () {
             return;
         }
         this.sortsort(Number(event));
+        this.sortLabel = this.sortOptions[this.currentFlag];
+    };
+    FUListPage.prototype.clickReverse = function () {
+        this.reverseIdx *= -1;
+        this.sortsort(this.currentFlag);
     };
     FUListPage.prototype.sortsort = function (flag) {
         var _this = this;
+        this.currentFlag = flag;
         this.dataList.sort(function (a, b) {
-            var retValue = -1;
+            // let retValue = -1;
             var cmpA = _this.getTime(a, flag);
             var cmpB = _this.getTime(b, flag);
             if (cmpA == undefined && cmpB == undefined) {
-                return retValue * -1;
+                return _this.reverseIdx * -1;
             }
             if (cmpA == undefined) {
-                return retValue * -1;
+                return _this.reverseIdx * -1;
             }
             if (cmpB == undefined) {
-                return retValue;
+                return _this.reverseIdx;
             }
             // cmpA = StringUtil.convertDate(cmpA);
             // cmpB = StringUtil.convertDate(cmpB);
@@ -491,10 +508,10 @@ var FUListPage = /** @class */ (function () {
             var date_a = new Date(cmpAL[0], cmpAL[1] - 1, cmpAL[2]);
             var date_b = new Date(cmpBL[0], cmpBL[1] - 1, cmpBL[2]);
             if (date_a > date_b) {
-                return retValue;
+                return _this.reverseIdx;
             }
             if (date_a < date_b) {
-                return retValue * -1;
+                return _this.reverseIdx * -1;
             }
             // if (Number(cmpAL[1]) > Number(cmpBL[1])) {
             //   return retValue * -1;
@@ -502,7 +519,7 @@ var FUListPage = /** @class */ (function () {
             // if (Number(cmpAL[2]) >= Number(cmpBL[2])) {
             //   return retValue * -1;
             // }
-            return retValue;
+            return _this.reverseIdx;
             // if (a.count > b.count) {
             //   return 1 * flag;
             // } else {
@@ -538,7 +555,7 @@ var FUListPage = /** @class */ (function () {
     };
     FUListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n\n        <ion-item>\n          <ion-label>정렬</ion-label>\n          <ion-select (ionChange)="optionSelected($event)">\n              <ion-option value=\'0\'>아이디 순</ion-option>\n              <ion-option value=\'1\'>내 코멘트</ion-option>\n              <ion-option value=\'2\'>내 보팅</ion-option>\n              <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n              <ion-option value=\'4\'>팔로우 보팅</ion-option>\n          </ion-select>\n      </ion-item>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-list class="history-list">\n\n        <ion-grid>\n          <ion-row *ngFor="let his of dataList">\n            <ion-col >\n              <div>reply : {{his.mecmt}}\n                <br>vote : {{his.mevote}} </div>\n            </ion-col>\n            <ion-col>\n              <div>{{his.txt}}</div>\n            </ion-col>\n            <ion-col>\n              <div>reply : {{his.fcmt}}\n                <br>vote : {{his.fvote}}</div>\n            </ion-col>\n            \n          </ion-row>\n        </ion-grid>\n        <!-- <ion-item class="item-css" *ngFor="let his of dataList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{his}}</h2> -->\n        <!-- <div [innerHtml]="his"></div> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n        <!-- </ion-item> -->\n      </ion-list>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
+            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n        <ion-list>\n          <ion-item style="min-width: \'200px\'">\n            <ion-label>{{sortLabel.label}}</ion-label>\n            <ion-select (ionChange)="optionSelected($event)">\n              \n                <ion-option *ngFor="let so of sortOptions" value=\'{{so.value}}\'>{{so.label}}</ion-option>\n                <!-- <ion-option value=\'1\'>내 코멘트</ion-option>\n                <ion-option value=\'2\'>내 보팅</ion-option>\n                <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n                <ion-option value=\'4\'>팔로우 보팅</ion-option> -->\n              \n            </ion-select>\n          </ion-item>\n        </ion-list>\n        <div *ngIf="currentFlag != 0">\n          <button ion-button color="light" (click)="clickReverse()">\n            <div *ngIf="reverseIdx == -1">최신순</div>\n            <div *ngIf="reverseIdx == 1">옛날, 없는순</div>\n          </button>\n        </div>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-list class="history-list">\n\n        <ion-grid>\n          <ion-row *ngFor="let his of dataList">\n            <ion-col>\n              <div>reply : {{his.mecmt}}\n                <br>vote : {{his.mevote}} </div>\n            </ion-col>\n            <ion-col>\n              <div>{{his.txt}}</div>\n            </ion-col>\n            <ion-col>\n              <div>reply : {{his.fcmt}}\n                <br>vote : {{his.fvote}}</div>\n            </ion-col>\n\n          </ion-row>\n        </ion-grid>\n        <!-- <ion-item class="item-css" *ngFor="let his of dataList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{his}}</h2> -->\n        <!-- <div [innerHtml]="his"></div> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n        <!-- </ion-item> -->\n      </ion-list>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
     ], FUListPage);
