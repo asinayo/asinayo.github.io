@@ -290,6 +290,20 @@ var HomePage = /** @class */ (function () {
             realData.timestamp = data[1].timestamp;
             if (data[1].op[0] == 'comment') {
                 var fuInfo = this.getMapData(realData.author, realData.parent_author, ahMap);
+                if (realData.json_metadata.length > 0) {
+                    try {
+                        realData.json_metadata = JSON.parse(realData.json_metadata);
+                        if (realData.json_metadata.tags.length > 0) {
+                            realData.jm = true;
+                        }
+                        else {
+                            console.log(realData);
+                        }
+                    }
+                    catch (_a) {
+                        console.log(realData);
+                    }
+                }
                 fuInfo.comment = realData;
                 // fuInfo.timestamp =  data[1].timestamp;
                 this.setMapData(realData.author, realData.parent_author, fuInfo, ahMap);
@@ -312,38 +326,40 @@ var HomePage = /** @class */ (function () {
             var ff = fList[i];
             var fuInfoMe = this.getMapData(this.fuId, ff, map);
             var fuInfoFollow = this.getMapData(ff, this.fuId, map);
-            var str = 'comment : ';
-            str += fuInfoMe.comment.timestamp;
-            str += ' , vote : ';
-            str += fuInfoMe.vote.timestamp;
-            str += ' = ';
-            str += this.fuId;
-            str += ' ♡  ';
-            str += ff;
-            str += ' = ';
-            str += 'comment : ';
-            str += fuInfoFollow.comment.timestamp;
-            str += ' , vote : ';
-            str += fuInfoFollow.vote.timestamp;
-            // console.log(str);
-            str = '<table class="tg">';
-            str += '<tr>';
-            str += '<th class="tg-us36">comment : ' + fuInfoMe.comment.timestamp + '</th>';
-            str += '<th class="tg-us36" colspan="3" rowspan="2">' + this.fuId + ' ♡ ' + ff + '</th>';
-            str += '<th class="tg-us36">comment : ' + fuInfoFollow.comment.timestamp + '</th>';
-            str += '</tr>';
-            str += '<tr>';
-            str += '<td class="tg-us36">vote : ' + fuInfoMe.vote.timestamp + '</td>';
-            str += '<td class="tg-us36">vote : ' + fuInfoFollow.vote.timestamp + '</td>';
-            str += '</tr>';
-            str += '</table>';
+            // let str = 'comment : ';
+            // str += fuInfoMe.comment.timestamp
+            // str += ' , vote : ';
+            // str += fuInfoMe.vote.timestamp;
+            // str += ' = ';
+            // str += this.fuId;
+            // str += ' ♡  ';
+            // str += ff;
+            // str += ' = ';
+            // str += 'comment : ';
+            // str += fuInfoFollow.comment.timestamp;
+            // str += ' , vote : ';
+            // str += fuInfoFollow.vote.timestamp;
+            // // console.log(str);
+            // str = '<table class="tg">';
+            // str += '<tr>';
+            // str += '<th class="tg-us36">comment : ' + fuInfoMe.comment.timestamp + '</th>';
+            // str += '<th class="tg-us36" colspan="3" rowspan="2">' + this.fuId + ' ♡ ' + ff +'</th>';
+            // str += '<th class="tg-us36">comment : ' +  fuInfoFollow.comment.timestamp + '</th>';
+            // str += '</tr>';
+            // str += '<tr>';
+            // str += '<td class="tg-us36">vote : ' + fuInfoMe.vote.timestamp + '</td>';
+            // str += '<td class="tg-us36">vote : ' + fuInfoFollow.vote.timestamp + '</td>';
+            // str += '</tr>';
+            // str += '</table>';
             // StringUtil.convertDate(cmpB)
             var dd = {
                 mecmt: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoMe.comment.timestamp),
                 mevote: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoMe.vote.timestamp),
                 txt: this.fuId + ' ♡ ' + ff,
                 fcmt: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoFollow.comment.timestamp),
-                fvote: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoFollow.vote.timestamp)
+                fvote: __WEBPACK_IMPORTED_MODULE_10__app_commons_StringUtil__["a" /* convertDate */](fuInfoFollow.vote.timestamp),
+                meobj: fuInfoMe,
+                fobj: fuInfoFollow
             };
             // testViewList.push(str);
             tesDataList.push(dd);
@@ -555,7 +571,7 @@ var FUListPage = /** @class */ (function () {
     };
     FUListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n        <ion-list>\n          <ion-item style="min-width: \'200px\'">\n            <ion-label>{{sortLabel.label}}</ion-label>\n            <ion-select (ionChange)="optionSelected($event)">\n              \n                <ion-option *ngFor="let so of sortOptions" value=\'{{so.value}}\'>{{so.label}}</ion-option>\n                <!-- <ion-option value=\'1\'>내 코멘트</ion-option>\n                <ion-option value=\'2\'>내 보팅</ion-option>\n                <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n                <ion-option value=\'4\'>팔로우 보팅</ion-option> -->\n              \n            </ion-select>\n          </ion-item>\n        </ion-list>\n        <div *ngIf="currentFlag != 0">\n          <button ion-button color="light" (click)="clickReverse()">\n            <div *ngIf="reverseIdx == -1">최신순</div>\n            <div *ngIf="reverseIdx == 1">옛날, 없는순</div>\n          </button>\n        </div>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-list class="history-list">\n\n        <ion-grid>\n          <ion-row *ngFor="let his of dataList">\n            <ion-col>\n              <div>reply : {{his.mecmt}}\n                <br>vote : {{his.mevote}} </div>\n            </ion-col>\n            <ion-col>\n              <div>{{his.txt}}</div>\n            </ion-col>\n            <ion-col>\n              <div>reply : {{his.fcmt}}\n                <br>vote : {{his.fvote}}</div>\n            </ion-col>\n\n          </ion-row>\n        </ion-grid>\n        <!-- <ion-item class="item-css" *ngFor="let his of dataList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{his}}</h2> -->\n        <!-- <div [innerHtml]="his"></div> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n        <!-- </ion-item> -->\n      </ion-list>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
+            selector: 'page-fulist',template:/*ion-inline-start:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/'<ion-header>\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-grid>\n      <ion-row>\n        <!-- <ion-title>List</ion-title> -->\n        <!-- <button ion-button color="light" (click)="sortsort(1)">내 코멘트 ↑</button>\n        <button ion-button color="dark" (click)="sortsort(3)">내 보팅 ↓</button>\n        <button ion-button color="default" (click)="sortsort(4)">팔로우 코멘트 ↓ </button>\n        <button ion-button color="secondary" (click)="sortsort(4)">팔로우 보팅 ↑</button> -->\n        <!-- <button ion-button color="danger" (click)="tagSort(3)">최근순</button> -->\n        <ion-list>\n          <ion-item style="min-width: \'200px\'">\n            <ion-label>{{sortLabel.label}}</ion-label>\n            <ion-select (ionChange)="optionSelected($event)">\n\n              <ion-option *ngFor="let so of sortOptions" value=\'{{so.value}}\'>{{so.label}}</ion-option>\n              <!-- <ion-option value=\'1\'>내 코멘트</ion-option>\n                <ion-option value=\'2\'>내 보팅</ion-option>\n                <ion-option value=\'3\'>팔로우 코멘트</ion-option>\n                <ion-option value=\'4\'>팔로우 보팅</ion-option> -->\n\n            </ion-select>\n          </ion-item>\n        </ion-list>\n        <div *ngIf="currentFlag != 0">\n          <button ion-button color="light" (click)="clickReverse()">\n            <div *ngIf="reverseIdx == -1">최신순</div>\n            <div *ngIf="reverseIdx == 1">옛날, 없는순</div>\n          </button>\n        </div>\n      </ion-row>\n      <!-- <ion-row>\n        2018-03-19 ~ 2018-04-19\n      </ion-row> -->\n    </ion-grid>\n\n\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-list class="history-list">\n\n        <ion-grid>\n          <ion-row *ngFor="let his of dataList">\n            <ion-col>\n              <div *ngIf="his.meobj.comment.jm == true">reply :\n                <a href="https://steemit.com/{{his.meobj.comment.json_metadata.tags[0]}}/@{{his.meobj.comment.parent_author}}/{{his.meobj.comment.parent_permlink}}/"\n                  target="_blank">{{his.mecmt}}</a>\n                <br>vote : {{his.mevote}} </div>\n              <div *ngIf="his.meobj.comment.jm != true">reply : {{his.mecmt}}\n                <br>vote : {{his.mevote}} </div>\n            </ion-col>\n            <ion-col>\n              <div>{{his.txt}}</div>\n            </ion-col>\n            <ion-col>\n              <div *ngIf="his.fobj.comment.jm == true">reply : <a href="https://steemit.com/{{his.fobj.comment.json_metadata.tags[0]}}/@{{his.fobj.comment.parent_author}}/{{his.fobj.comment.parent_permlink}}/"\n                target="_blank">{{his.fcmt}}</a>\n                <br>vote : {{his.fvote}}</div>\n              <div  *ngIf="his.fobj.comment.jm != true">reply : {{his.fcmt}}\n                <br>vote : {{his.fvote}}</div>\n            </ion-col>\n\n          </ion-row>\n        </ion-grid>\n        <!-- <ion-item class="item-css" *ngFor="let his of dataList" > -->\n        <!-- <ion-avatar item-start> -->\n        <!-- <ion-avatar item-start>\n        <img src="https://steemitimages.com/u/{{fuId}}/avatar">\n      </ion-avatar> -->\n\n        <!-- </ion-avatar> -->\n        <!-- <h2>{{his}}</h2> -->\n        <!-- <div [innerHtml]="his"></div> -->\n        <!-- <h3>count - {{his}}</h3> -->\n        <!-- <p>I\'ve had a pretty messed up day. If we just...</p> -->\n        <!-- <ion-avatar item-start>\n                        <img src="https://steemitimages.com/u/{{his.friendId}}/avatar">\n                      </ion-avatar> -->\n\n        <!-- <ion-avatar item-end>\n        <img src="https://steemitimages.com/u/{{his}}/avatar">\n      </ion-avatar> -->\n        <!-- </ion-item> -->\n      </ion-list>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\project\vscode\steemit\srt\src\pages\fulist\fulist.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
     ], FUListPage);
