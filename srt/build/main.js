@@ -231,7 +231,11 @@ var HomePage = /** @class */ (function () {
                 // ddd += cmtData.body;
                 // ddd += '\r\n';
                 // json_metadata
-                data[1].op[1].json_metadata = JSON.parse(data[1].op[1].json_metadata);
+                try {
+                    data[1].op[1].json_metadata = JSON.parse(data[1].op[1].json_metadata);
+                }
+                catch (e) {
+                }
                 data[1].op[1].body = this.converter.makeHtml(data[1].op[1].body);
                 talkList.push(data);
             }
