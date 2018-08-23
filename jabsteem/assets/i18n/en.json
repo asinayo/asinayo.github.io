@@ -37,5 +37,6 @@
     "FU Detail" : "This function shows the 'friendly' activities of the people you follow. It shows the most recent comments and votes given and received between yourself and them. In addition, you can check their reputation, steem power and their last active date(of votes, posts and comments).",
     "FAS Detail" : "This function reveals your followers' most recent posts; it was designed to help you with verification.",
     "CATCH Detail": "You can see the 'catch-mind(a type of guess-the-word puzzle)' games played on Steemit, as well as all the related statistics.",
-    "SBN Detail": "This function shows when and where two Steemians upvoted each other during the last 30 days."
+    "SBN Detail": "This function shows when and where two Steemians upvoted each other during the last 30 days.",
+	"FMT Detail" : "한 스티미언과 언제 처음 만났는지 볼 수 있는 기능입니다. 기능 특성상.. 더럽게 느리니 기다려주세요"
 }
